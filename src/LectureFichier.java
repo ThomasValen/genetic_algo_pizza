@@ -42,6 +42,7 @@ public class LectureFichier {
                         if (ig.getNom().equals(ingredientsAimer[j])) {
                             ig.plus1Aimer();
                             client.ajouterIngrendientAimer(ig);
+                            client.ajouterIngrendientAimerString(ig.getNom());
                             ingredientExiste = true;
                             break;
                         }
@@ -51,6 +52,7 @@ public class LectureFichier {
                         ingredient.plus1Aimer();
                         listeIngredients.add(ingredient);
                         client.ajouterIngrendientAimer(ingredient);
+                        client.ajouterIngrendientAimerString(ingredient.getNom());
                     }
                 }
 
@@ -66,6 +68,7 @@ public class LectureFichier {
                         if (ig.getNom().equals(ingredientsDetester[j])) {
                             ig.plus1Detester();
                             client.ajouterIngrendientDetester(ig);
+                            client.ajouterIngrendientDetesterString(ig.getNom());
                             ingredientExiste = true;
                             break;
                         }
@@ -75,6 +78,7 @@ public class LectureFichier {
                         ingredient.plus1Detester();
                         listeIngredients.add(ingredient);
                         client.ajouterIngrendientDetester(ingredient);
+                        client.ajouterIngrendientDetesterString(ingredient.getNom());
                     }
                 }
                 listeClients.add(client);

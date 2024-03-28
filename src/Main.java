@@ -10,6 +10,12 @@ public class Main {
     public static void main(String[] args) {
         lf.lireFichier();
         System.out.println(lf);
+        Pizza pizza= new Pizza();
+        pizza.addIngredientString("ingredient319");
+        pizza.addIngredientString("ingredient79");
+        pizza.addIngredientString("ingredient9");
+        pizza.evaluer_score(lf.getListeClients());
+        System.out.println(pizza.getScore());
         ArrayList<Pizza> gen = new_gen();
 
         int nb_gen_max = 1000;
@@ -28,6 +34,7 @@ public class Main {
             for(int j =0;j<nb_ingr_pizza;j++){
                 int random_ingr = (int)(Math.random() * liste_ingredients.size());
                 p.addIngredient(liste_ingredients.get(random_ingr));
+                p.addIngredientString(liste_ingredients.get(random_ingr).getNom());
             }
             p.evaluer_score(lf.getListeClients());
             res.add(p);
