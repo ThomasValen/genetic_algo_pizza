@@ -63,4 +63,7 @@ public class LectureFichier {
         }
     }
 
+    public ArrayList<Ingredient> getListeIngredients() {
+        return listeIngredients;
+    }
 }
