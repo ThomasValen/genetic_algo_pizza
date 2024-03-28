@@ -1,17 +1,17 @@
 public class Ingredient {
-    private int num_ingr;
+    private String num_ingr;
     private int nb_fois_aime;
     private int nb_fois_pas_aime;
 
-    public Ingredient(int num_ingr) {
+    public Ingredient(String num_ingr) {
         this.num_ingr = num_ingr;
     }
 
-    public int getNum_ingr() {
+    public String getNum_ingr() {
         return num_ingr;
     }
 
-    public void setNum_ingr(int num_ingr) {
+    public void setNum_ingr(String num_ingr) {
         this.num_ingr = num_ingr;
     }
 
