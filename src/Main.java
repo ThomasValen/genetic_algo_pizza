@@ -10,12 +10,13 @@ public class Main {
     public static void main(String[] args) {
         lf.lireFichier();
         System.out.println(lf);
-        /*ArrayList<Pizza> last_gen = new_gen();
+        ArrayList<Pizza> gen = new_gen();
 
         int nb_gen_max = 1000;
         for (int i=0; i<nb_gen_max; i++) {
-
-        }*/
+            gen = croisement(gen);
+            gen = mutation(gen);
+        }
 
     }
     public static ArrayList<Pizza> new_gen(){
@@ -35,11 +36,34 @@ public class Main {
         return res;
     }
 
-    public static ArrayList<Pizza> croisement(ArrayList<Pizza> ancienne, ArrayList<Pizza> nouvelle){
-        ArrayList<Pizza> combinaison = new ArrayList<>();
-        for(int i =0;i<200;i++){
 
+    public static ArrayList<Pizza> croisement(ArrayList<Pizza> list_pizza){
+        ArrayList<Pizza> combinaison = new ArrayList<>();
+        for(int i =0;i<200-2;i=i+2){
+            int coupure1 = (int)(Math.random() * list_pizza.get(i).getNb_ingr());
+            int coupure2 = (int)(Math.random() * list_pizza.get(i+1).getNb_ingr());
+            Pizza p1 = new Pizza();
+            Pizza p2 = new Pizza();
+            for(int e = 0;e<coupure1;e++){
+                p1.addIngredient(list_pizza.get(i).getIngredients().get(e));
+            }
+            for(int e = 0;e<coupure2;e++){
+                p2.addIngredient(list_pizza.get(i+1).getIngredients().get(e));
+            }
+            for(int e =coupure1;e<list_pizza.get(i).getNb_ingr();e++){
+                p2.addIngredient(list_pizza.get(i).getIngredients().get(e));
+            }
+            for(int e =coupure2;e<list_pizza.get(i+1).getNb_ingr();e++){
+                p1.addIngredient(list_pizza.get(i+1).getIngredients().get(e));
+            }
+            combinaison.add(p1);
+            combinaison.add(p2);
         }
+        sortPizzasByScore(combinaison);
+        return combinaison;
+    }
+
+    public static ArrayList<Pizza> mutation(ArrayList<Pizza> pizzas){
         return null;
     }
 

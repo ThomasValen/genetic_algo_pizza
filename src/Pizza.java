@@ -22,11 +22,6 @@ public class Pizza {
         this.ingredients.add(i);
     }
 
-    public Pizza croisement(Pizza p){
-        int coupure1 = (int)(Math.random() * getNb_ingr());
-        return null;
-    }
-
     public void evaluer_score(ArrayList<Client> clients){
 
     }
