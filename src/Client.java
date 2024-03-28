@@ -3,12 +3,16 @@ package src;
 import java.util.ArrayList;
 
 public class Client {
-    public ArrayList<Ingredient> ingredientsAimer;
-    public ArrayList<Ingredient> ingredientsDetester;
+    private ArrayList<Ingredient> ingredientsAimer;
+    private ArrayList<String> ingredientsAimerString;
+    private ArrayList<String> ingredientsDetesterString;
+    private ArrayList<Ingredient> ingredientsDetester;
 
     public Client() {
         this.ingredientsAimer = new ArrayList<>();
         this.ingredientsDetester = new ArrayList<>();
+        this.ingredientsDetesterString = new ArrayList<>();
+        this.ingredientsAimerString = new ArrayList<>();
     }
 
     public ArrayList<Ingredient> getIngredientsAimer() {
@@ -28,9 +32,13 @@ public class Client {
     }
     public void ajouterIngrendientAimer(Ingredient ingredient){
         this.ingredientsAimer.add(ingredient);
+    }    public void ajouterIngrendientAimerString(String ingredient){
+        this.ingredientsAimerString.add(ingredient);
     }
     public void ajouterIngrendientDetester(Ingredient ingredient){
         this.ingredientsDetester.add(ingredient);
+    }    public void ajouterIngrendientDetesterString(String ingredient){
+        this.ingredientsDetesterString.add(ingredient);
     }
 
     @Override
@@ -39,5 +47,13 @@ public class Client {
                 "ingredientsAimer=" + ingredientsAimer +
                 ", ingredientsDetester=" + ingredientsDetester +
                 '}';
+    }
+
+    public ArrayList<String> getIngredientsAimerString() {
+        return ingredientsAimerString;
+    }
+
+    public ArrayList<String> getIngredientsDetesterString() {
+        return ingredientsDetesterString;
     }
 }
