@@ -58,7 +58,7 @@ public class Main {
             Pizza p1 = new Pizza();
             Pizza p2 = new Pizza();
             for(int e = 0;e<coupure1;e++){
-                if(!p1.getIngredientsString().contains(list_pizza.get(i+1).getIngredients().get(e).getNom())) {
+                if(!p1.getIngredientsString().contains(list_pizza.get(i).getIngredients().get(e).getNom())) {
                     p1.addIngredient(list_pizza.get(i).getIngredients().get(e));
                     p1.addIngredientString(list_pizza.get(i).getIngredients().get(e).getNom());
                 }
@@ -70,7 +70,7 @@ public class Main {
                 }
             }
             for(int e =coupure1;e<list_pizza.get(i).getNb_ingr();e++){
-                if(!p2.getIngredientsString().contains(list_pizza.get(i+1).getIngredients().get(e).getNom())) {
+                if(!p2.getIngredientsString().contains(list_pizza.get(i).getIngredients().get(e).getNom())) {
                     p2.addIngredient(list_pizza.get(i).getIngredients().get(e));
                     p2.addIngredientString(list_pizza.get(i).getIngredients().get(e).getNom());
                 }
