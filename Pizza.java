@@ -15,4 +15,8 @@ public class Pizza {
         return ingredients;
     }
 
+    public void addIngredient(Ingredient i){
+        this.ingredients.add(i);
+    }
+
 }
