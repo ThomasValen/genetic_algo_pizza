@@ -91,14 +91,34 @@ public class Main {
                 p.getIngredientsString().remove(randomSupprimer);
             } else if (randomNumber >= 3 && randomNumber < 6) {
                 //ajouter un ingrédient
-                int randomAjouter = random.nextInt(lf.getNombreClients());
-                ArrayList<Ingredient> listTemporaire = lf.getListeIngredients();
+                ArrayList<Ingredient> listTemporaire = new ArrayList<>();
+                ArrayList<String> listTemporaireString = new ArrayList<>();
+                ajouterIngredient(p,listTemporaire,listTemporaireString);
+                int randomAjouter = random.nextInt(listTemporaire.size());
+                p.addIngredientString(listTemporaireString.get(randomAjouter));
+                p.addIngredient(listTemporaire.get(randomAjouter));
             } else if (randomNumber >= 6 && randomNumber < 9) {
                 //remplacer un ingrédient
+                int randomSupprimer = random.nextInt(pizzas.get(i).getNb_ingr());
+                ArrayList<Ingredient> listTemporaire = new ArrayList<>();
+                ArrayList<String> listTemporaireString = new ArrayList<>();
+                p.getIngredients().remove(randomSupprimer);
+                ajouterIngredient(p,listTemporaire,listTemporaireString);
+                int randomAjouter = random.nextInt(listTemporaire.size());
+                p.addIngredientString(listTemporaireString.get(randomAjouter));
+                p.addIngredient(listTemporaire.get(randomAjouter));
             }
             combinaison.add(p);
         }
         return combinaison;
+    }
+    public static void ajouterIngredient(Pizza p, ArrayList<Ingredient> listTemporaire, ArrayList<String> listTemporaireString){
+        for (Ingredient ingredient : lf.getListeIngredients()){
+            if (!p.getIngredientsString().contains(ingredient.getNom())){
+                listTemporaire.add(ingredient);
+                listTemporaireString.add(ingredient.getNom());
+            }
+        }
     }
 
     public static void sortPizzasByScore(ArrayList<Pizza> pizzas) {
