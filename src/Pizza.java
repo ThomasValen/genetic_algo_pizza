@@ -48,4 +48,9 @@ public class Pizza {
     public int getScore() {
         return score;
     }
+
+    @Override
+    public String toString() {
+        return "Pizza{" + ingredientsString + '}';
+    }
 }
