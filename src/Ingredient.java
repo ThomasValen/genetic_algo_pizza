@@ -40,4 +40,13 @@ public class Ingredient {
     public void plus1Detester(){
         this.nb_fois_pas_aime++;
     }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "nom='" + nom + '\'' +
+                ", nb_fois_aime=" + nb_fois_aime +
+                ", nb_fois_pas_aime=" + nb_fois_pas_aime +
+                '}';
+    }
 }
