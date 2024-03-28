@@ -1,18 +1,22 @@
+package src;
+
 public class Ingredient {
-    private String num_ingr;
+    private String nom;
     private int nb_fois_aime;
     private int nb_fois_pas_aime;
 
-    public Ingredient(String num_ingr) {
-        this.num_ingr = num_ingr;
+    public Ingredient(String nom) {
+        this.nom = nom;
+        this.nb_fois_aime = 0;
+        this.nb_fois_pas_aime = 0 ;
     }
 
-    public String getNum_ingr() {
-        return num_ingr;
+    public String getNom() {
+        return nom;
     }
 
-    public void setNum_ingr(String num_ingr) {
-        this.num_ingr = num_ingr;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public int getNb_fois_aime() {
@@ -29,5 +33,11 @@ public class Ingredient {
 
     public void setNb_fois_pas_aime(int nb_fois_pas_aime) {
         this.nb_fois_pas_aime = nb_fois_pas_aime;
+    }
+    public void plus1Aimer(){
+        this.nb_fois_aime++;
+    }
+    public void plus1Detester(){
+        this.nb_fois_pas_aime++;
     }
 }
