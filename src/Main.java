@@ -23,7 +23,7 @@ public class Main {
         int nb_gen_max = 15;
         for (int i=1; i<nb_gen_max+1; i++) {
             gen = croisement(gen);
-            //gen = mutation(gen);
+            gen = mutation(gen);
             print_generation(i,gen);
             //print_bestScoreGen(i,gen);
         }
@@ -52,7 +52,7 @@ public class Main {
 
     public static ArrayList<Pizza> croisement(ArrayList<Pizza> list_pizza){
         ArrayList<Pizza> combinaison = new ArrayList<>();
-        for(int i =0;i<200-2;i=i+2){
+        for(int i =0;i<200;i=i+2){
             int coupure1 = (int)(Math.random() * list_pizza.get(i).getNb_ingr());
             int coupure2 = (int)(Math.random() * list_pizza.get(i+1).getNb_ingr());
             Pizza p1 = new Pizza();
@@ -94,7 +94,8 @@ public class Main {
     public static ArrayList<Pizza> mutation(ArrayList<Pizza> pizzas){
         Random random = new Random();
         ArrayList<Pizza> combinaison = new ArrayList<>();
-        for(int i =0;i<200-2;i=i+2){
+        System.out.println("TAILLE DES PIZZAS AVANT " +pizzas.size());
+        for(int i =0;i<200;i++){
             Pizza p = new Pizza();
             p.setIngredients(pizzas.get(i).getIngredients());
             p.setIngredientsString(pizzas.get(i).getIngredientsString());
@@ -124,9 +125,11 @@ public class Main {
                 p.addIngredientString(listTemporaireString.get(randomAjouter));
                 p.addIngredient(listTemporaire.get(randomAjouter));
             }
+            p.evaluer_score(lf.getListeClients());
             combinaison.add(p);
         }
         sortPizzasByScore(combinaison);
+        System.out.println("TAILLE DE LA MUTATION "+combinaison.size());
         return combinaison;
     }
     public static void ajouterIngredient(Pizza p, ArrayList<Ingredient> listTemporaire, ArrayList<String> listTemporaireString){
