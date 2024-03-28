@@ -4,7 +4,7 @@ public class Client {
     public ArrayList<Ingredient> ingredientsAimer;
     public ArrayList<Ingredient> ingredientsDetester;
 
-    public Client(ArrayList<Ingredient> ingredientsAimer, ArrayList<Ingredient> ingredientsDetester) {
+    public Client() {
         this.ingredientsAimer = ingredientsAimer;
         this.ingredientsDetester = ingredientsDetester;
     }
@@ -24,5 +24,10 @@ public class Client {
     public void setIngredientsDetester(ArrayList<Ingredient> ingredientsDetester) {
         this.ingredientsDetester = ingredientsDetester;
     }
-
+    public void ajouterIngrendientAimer(Ingredient ingredient){
+        this.ingredientsAimer.add(ingredient);
+    }
+    public void ajouterIngrendientDetester(Ingredient ingredient){
+        this.ingredientsDetester.add(ingredient);
+    }
 }
