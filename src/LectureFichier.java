@@ -1,3 +1,5 @@
+package src;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -48,8 +50,8 @@ public class LectureFichier {
                 for (int j = 0; j < nombreIngredientsDetester; j++) {
                     for (Ingredient ig : listeIngredients){
                         if(ig.getNom().equals(ingredientsDetester[j])){
-                            ig.plus1Aimer();
-                            client.ajouterIngrendientAimer(ig);
+                            ig.plus1Detester();
+                            client.ajouterIngrendientDetester(ig);
                         } else {
                             Ingredient ingredient = new Ingredient(ingredientsDetester[j]);
                             client.ajouterIngrendientDetester(ingredient);

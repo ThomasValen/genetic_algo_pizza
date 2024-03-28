@@ -1,6 +1,6 @@
-import java.lang.reflect.Array;
+package src;
+
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Main {
     private static LectureFichier lf = new LectureFichier("");

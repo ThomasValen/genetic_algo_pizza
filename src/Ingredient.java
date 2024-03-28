@@ -1,3 +1,5 @@
+package src;
+
 public class Ingredient {
     private String nom;
     private int nb_fois_aime;
