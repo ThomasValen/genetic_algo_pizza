@@ -3,6 +3,7 @@ package src;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 
 public class Main {
     private static LectureFichier lf = new LectureFichier("src/fichiers/d_difficile.txt");
@@ -53,15 +54,19 @@ public class Main {
             Pizza p2 = new Pizza();
             for(int e = 0;e<coupure1;e++){
                 p1.addIngredient(list_pizza.get(i).getIngredients().get(e));
+                p1.addIngredientString(list_pizza.get(i).getIngredients().get(e).getNom());
             }
             for(int e = 0;e<coupure2;e++){
                 p2.addIngredient(list_pizza.get(i+1).getIngredients().get(e));
+                p2.addIngredientString(list_pizza.get(i+1).getIngredients().get(e).getNom());
             }
             for(int e =coupure1;e<list_pizza.get(i).getNb_ingr();e++){
                 p2.addIngredient(list_pizza.get(i).getIngredients().get(e));
+                p2.addIngredientString(list_pizza.get(i).getIngredients().get(e).getNom());
             }
             for(int e =coupure2;e<list_pizza.get(i+1).getNb_ingr();e++){
                 p1.addIngredient(list_pizza.get(i+1).getIngredients().get(e));
+                p1.addIngredientString(list_pizza.get(i+1).getIngredients().get(e).getNom());
             }
             combinaison.add(p1);
             combinaison.add(p2);
@@ -71,7 +76,29 @@ public class Main {
     }
 
     public static ArrayList<Pizza> mutation(ArrayList<Pizza> pizzas){
-        return null;
+        Random random = new Random();
+        ArrayList<Pizza> combinaison = new ArrayList<>();
+        for(int i =0;i<200-2;i=i+2){
+            Pizza p = new Pizza();
+            p.setIngredients(pizzas.get(i).getIngredients());
+            p.setIngredientsString(pizzas.get(i).getIngredientsString());
+            int randomNumber = random.nextInt(100);
+
+            if (randomNumber >= 0 && randomNumber < 3) {
+                //Supprimer un ingrédient
+                int randomSupprimer = random.nextInt(pizzas.get(i).getNb_ingr());
+                p.getIngredients().remove(randomSupprimer);
+                p.getIngredientsString().remove(randomSupprimer);
+            } else if (randomNumber >= 3 && randomNumber < 6) {
+                //ajouter un ingrédient
+                int randomAjouter = random.nextInt(lf.getNombreClients());
+                ArrayList<Ingredient> listTemporaire = lf.getListeIngredients();
+            } else if (randomNumber >= 6 && randomNumber < 9) {
+                //remplacer un ingrédient
+            }
+            combinaison.add(p);
+        }
+        return combinaison;
     }
 
     public static void sortPizzasByScore(ArrayList<Pizza> pizzas) {

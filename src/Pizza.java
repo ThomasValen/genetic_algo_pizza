@@ -48,4 +48,16 @@ public class Pizza {
     public int getScore() {
         return score;
     }
+
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public ArrayList<String> getIngredientsString() {
+        return ingredientsString;
+    }
+
+    public void setIngredientsString(ArrayList<String> ingredientsString) {
+        this.ingredientsString = ingredientsString;
+    }
 }
