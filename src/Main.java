@@ -56,20 +56,28 @@ public class Main {
             Pizza p1 = new Pizza();
             Pizza p2 = new Pizza();
             for(int e = 0;e<coupure1;e++){
-                p1.addIngredient(list_pizza.get(i).getIngredients().get(e));
-                p1.addIngredientString(list_pizza.get(i).getIngredients().get(e).getNom());
+                if(!p1.getIngredientsString().contains(list_pizza.get(i+1).getIngredients().get(e).getNom())) {
+                    p1.addIngredient(list_pizza.get(i).getIngredients().get(e));
+                    p1.addIngredientString(list_pizza.get(i).getIngredients().get(e).getNom());
+                }
             }
             for(int e = 0;e<coupure2;e++){
-                p2.addIngredient(list_pizza.get(i+1).getIngredients().get(e));
-                p2.addIngredientString(list_pizza.get(i+1).getIngredients().get(e).getNom());
+                if(!p2.getIngredientsString().contains(list_pizza.get(i+1).getIngredients().get(e).getNom())) {
+                    p2.addIngredient(list_pizza.get(i + 1).getIngredients().get(e));
+                    p2.addIngredientString(list_pizza.get(i + 1).getIngredients().get(e).getNom());
+                }
             }
             for(int e =coupure1;e<list_pizza.get(i).getNb_ingr();e++){
-                p2.addIngredient(list_pizza.get(i).getIngredients().get(e));
-                p2.addIngredientString(list_pizza.get(i).getIngredients().get(e).getNom());
+                if(!p2.getIngredientsString().contains(list_pizza.get(i+1).getIngredients().get(e).getNom())) {
+                    p2.addIngredient(list_pizza.get(i).getIngredients().get(e));
+                    p2.addIngredientString(list_pizza.get(i).getIngredients().get(e).getNom());
+                }
             }
             for(int e =coupure2;e<list_pizza.get(i+1).getNb_ingr();e++){
-                p1.addIngredient(list_pizza.get(i+1).getIngredients().get(e));
-                p1.addIngredientString(list_pizza.get(i+1).getIngredients().get(e).getNom());
+                if(!p1.getIngredientsString().contains(list_pizza.get(i+1).getIngredients().get(e).getNom())) {
+                    p1.addIngredient(list_pizza.get(i + 1).getIngredients().get(e));
+                    p1.addIngredientString(list_pizza.get(i + 1).getIngredients().get(e).getNom());
+                }
             }
             p1.evaluer_score(lf.getListeClients());
             p2.evaluer_score(lf.getListeClients());
@@ -116,6 +124,7 @@ public class Main {
             }
             combinaison.add(p);
         }
+        sortPizzasByScore(combinaison);
         return combinaison;
     }
     public static void ajouterIngredient(Pizza p, ArrayList<Ingredient> listTemporaire, ArrayList<String> listTemporaireString){
