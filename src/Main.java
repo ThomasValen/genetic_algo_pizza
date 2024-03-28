@@ -19,12 +19,13 @@ public class Main {
         System.out.println(pizza.getScore());*/
         ArrayList<Pizza> gen = new_gen();
         System.out.println("INIT RANDOM GEN");
-        print_generation(-1,gen);
-        int nb_gen_max = 2;
-        for (int i=0; i<nb_gen_max; i++) {
+        print_generation(0,gen);
+        int nb_gen_max = 15;
+        for (int i=1; i<nb_gen_max+1; i++) {
             gen = croisement(gen);
             //gen = mutation(gen);
             print_generation(i,gen);
+            //print_bestScoreGen(i,gen);
         }
 
     }
@@ -76,7 +77,7 @@ public class Main {
             combinaison.add(p2);
         }
         sortPizzasByScore(combinaison);
-        print_generation(-2,combinaison);
+        //print_generation(-2,combinaison);
         return combinaison;
     }
 
@@ -123,4 +124,10 @@ public class Main {
         }
         System.out.println("");
     }
+
+    public static void print_bestScoreGen(int num_gen , ArrayList<Pizza> gen){
+        System.out.println("NUMERO GEN : "+num_gen);
+        System.out.println("score : "+gen.get(0).getScore()+"\n");
+    }
+
 }
