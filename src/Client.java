@@ -7,8 +7,8 @@ public class Client {
     public ArrayList<Ingredient> ingredientsDetester;
 
     public Client() {
-        this.ingredientsAimer = ingredientsAimer;
-        this.ingredientsDetester = ingredientsDetester;
+        this.ingredientsAimer = new ArrayList<>();
+        this.ingredientsDetester = new ArrayList<>();
     }
 
     public ArrayList<Ingredient> getIngredientsAimer() {
@@ -31,5 +31,13 @@ public class Client {
     }
     public void ajouterIngrendientDetester(Ingredient ingredient){
         this.ingredientsDetester.add(ingredient);
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "ingredientsAimer=" + ingredientsAimer +
+                ", ingredientsDetester=" + ingredientsDetester +
+                '}';
     }
 }

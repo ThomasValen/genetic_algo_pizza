@@ -3,16 +3,17 @@ package src;
 import java.util.ArrayList;
 
 public class Main {
-    private static LectureFichier lf = new LectureFichier("");
+    private static LectureFichier lf = new LectureFichier("src/fichiers/d_difficile.txt");
 
     public static void main(String[] args) {
-
-        ArrayList<Pizza> last_gen = new_gen();
+        lf.lireFichier();
+        System.out.println(lf);
+        /*ArrayList<Pizza> last_gen = new_gen();
 
         int nb_gen_max = 1000;
         for (int i=0; i<nb_gen_max; i++) {
 
-        }
+        }*/
 
     }
     public static ArrayList<Pizza> new_gen(){
