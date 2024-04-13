@@ -16,17 +16,24 @@ public class Main {
         ArrayList<Pizza> gen = new_gen();
         System.out.println("INIT RANDOM GEN");
         print_generation(0,gen);
-        String cheminFichier = "C:/Users/Thomas/Documents/opti/soluce.txt";
+        String cheminFichier = "src/fichiers/soluce_d.txt";
 
-        String contenu = ""+gen.get(0).getIngredients().size();
+        int nb_gen_max = 100;
+        for (int i=1; i<nb_gen_max+1; i++) {
+            gen = croisement(gen);
+            gen = mutation(gen);
+            print_generation(i,gen);
+            print_bestScoreGen(i,gen);
+        }
+        StringBuilder contenu = new StringBuilder("" + gen.get(0).getIngredients().size());
         for (String ingr : gen.get(0).getIngredientsString()){
-            contenu = contenu + " "+ingr;
+            contenu.append(" ").append(ingr);
         }
 
         try {
             FileWriter writer = new FileWriter(cheminFichier);
 
-            writer.write(contenu);
+            writer.write(contenu.toString());
 
             writer.close();
 
@@ -35,15 +42,6 @@ public class Main {
             System.out.println("Une erreur s'est produite lors de l'écriture dans le fichier : " + e.getMessage());
             e.printStackTrace();
         }
-
-        int nb_gen_max = 100;
-        for (int i=1; i<nb_gen_max+1; i++) {
-            gen = croisement(gen);
-            gen = mutation(gen);
-            print_generation(i,gen);
-            //print_bestScoreGen(i,gen);
-        }
-
     }
     public static ArrayList<Pizza> new_gen(){
         ArrayList<Ingredient> liste_ingredients = lf.getListeIngredients();
@@ -104,7 +102,6 @@ public class Main {
                 combinaison.add(list_pizza.get(i+1));
         }
         sortPizzasByScore(combinaison);
-        //print_generation(-2,combinaison);
         return combinaison;
     }
 
@@ -149,7 +146,6 @@ public class Main {
                 combinaison.add(pizzas.get(i));
         }
         sortPizzasByScore(combinaison);
-        System.out.println("YOOO + "+combinaison.size());
         return combinaison;
     }
     public static void ajouterIngredient(Pizza p, ArrayList<Ingredient> listTemporaire, ArrayList<String> listTemporaireString){

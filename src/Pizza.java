@@ -33,20 +33,16 @@ public class Pizza {
         this.score = 0;
         for (Client client : clients){
             boolean nextClient = false;
-            for (String ingredient : ingredientsString) {
-                if (client.getIngredientsDetesterString().contains(ingredient)){
-                    nextClient = true;
-                    break;
+            if(!client.getIngredientsDetesterString().isEmpty()) {
+                for (String ingredient : ingredientsString) {
+                    if (client.getIngredientsDetesterString().contains(ingredient)) {
+                        nextClient = true;
+                        break;
+                    }
                 }
             }
             if(!nextClient) {
-                int compteur = 0;
-                for (String ingredient : client.getIngredientsAimerString()) {
-                    if (ingredientsString.contains(ingredient)) {
-                        compteur++;
-                    }
-                }
-                if (compteur >= client.getIngredientsAimerString().size())
+                if(ingredientsString.containsAll(client.getIngredientsAimerString()))
                     score++;
             }
         }
