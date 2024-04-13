@@ -22,26 +22,30 @@ public class Pizza {
 
     public void addIngredient(Ingredient i){
         this.ingredients.add(i);
-    }
-    public void addIngredientString(String i){
-        this.ingredientsString.add(i);
+        this.ingredientsString.add(i.getNom());
     }
 
+
     public void evaluer_score(ArrayList<Client> clients){
+        this.score = 0;
         for (Client client : clients){
+            boolean nextClient = false;
             for (String ingredient : ingredientsString) {
                 if (client.getIngredientsDetesterString().contains(ingredient)){
+                    nextClient = true;
                     break;
                 }
             }
-            int compteur = 0;
-            for (String ingredient : client.getIngredientsAimerString()){
-                if (ingredientsString.contains(ingredient)){
-                    compteur++;
+            if(!nextClient) {
+                int compteur = 0;
+                for (String ingredient : client.getIngredientsAimerString()) {
+                    if (ingredientsString.contains(ingredient)) {
+                        compteur++;
+                    }
                 }
+                if (compteur >= client.getIngredientsAimerString().size())
+                    score++;
             }
-            if(compteur>= client.getIngredientsAimerString().size())
-                score++;
         }
     }
 
