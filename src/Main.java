@@ -55,7 +55,6 @@ public class Main {
                 int random_ingr = (int)(Math.random() * liste_ingredients.size());
                 if(!p.getIngredientsString().contains(liste_ingredients.get(random_ingr).getNom())) {
                     p.addIngredient(liste_ingredients.get(random_ingr));
-                    p.addIngredientString(liste_ingredients.get(random_ingr).getNom());
                 }
             }
             p.evaluer_score(lf.getListeClients());
@@ -69,34 +68,28 @@ public class Main {
     public static ArrayList<Pizza> croisement(ArrayList<Pizza> list_pizza){
         ArrayList<Pizza> combinaison = new ArrayList<>();
         for(int i =0;i<100;i=i+2){
-            int coupure1 = (int)(Math.random() * list_pizza.get(i).getNb_ingr());//2
-            //coupure1 = coupure1 + list_pizza.get(i).getNb_ingr()/4;
-            int coupure2 = (int)(Math.random() * list_pizza.get(i+1).getNb_ingr());//2
-            //coupure2 = coupure2 + list_pizza.get(i+1).getNb_ingr()/4;
+            int coupure1 = (int)(Math.random() * list_pizza.get(i).getNb_ingr());
+            int coupure2 = (int)(Math.random() * list_pizza.get(i+1).getNb_ingr());
             Pizza p1 = new Pizza();
             Pizza p2 = new Pizza();
             for(int e = 0;e<coupure1;e++){
                 if(!p1.getIngredientsString().contains(list_pizza.get(i).getIngredients().get(e).getNom())) {
                     p1.addIngredient(list_pizza.get(i).getIngredients().get(e));
-                    p1.addIngredientString(list_pizza.get(i).getIngredients().get(e).getNom());
                 }
             }
             for(int e = 0;e<coupure2;e++){
                 if(!p2.getIngredientsString().contains(list_pizza.get(i+1).getIngredients().get(e).getNom())) {
                     p2.addIngredient(list_pizza.get(i + 1).getIngredients().get(e));
-                    p2.addIngredientString(list_pizza.get(i + 1).getIngredients().get(e).getNom());
                 }
             }
             for(int e =coupure1;e<list_pizza.get(i).getNb_ingr();e++){
                 if(!p2.getIngredientsString().contains(list_pizza.get(i).getIngredients().get(e).getNom())) {
                     p2.addIngredient(list_pizza.get(i).getIngredients().get(e));
-                    p2.addIngredientString(list_pizza.get(i).getIngredients().get(e).getNom());
                 }
             }
             for(int e =coupure2;e<list_pizza.get(i+1).getNb_ingr();e++){
                 if(!p1.getIngredientsString().contains(list_pizza.get(i+1).getIngredients().get(e).getNom())) {
                     p1.addIngredient(list_pizza.get(i + 1).getIngredients().get(e));
-                    p1.addIngredientString(list_pizza.get(i + 1).getIngredients().get(e).getNom());
                 }
             }
             p1.evaluer_score(lf.getListeClients());
@@ -128,8 +121,7 @@ public class Main {
                 //Supprimer un ingrédient
                 if(pizzas.get(i).getNb_ingr()!=0) {
                     int randomSupprimer = random.nextInt(pizzas.get(i).getNb_ingr());
-                    p.getIngredients().remove(randomSupprimer);
-                    p.getIngredientsString().remove(randomSupprimer);
+                    p.removeIngredient(randomSupprimer);
                 }
             } else if (randomNumber >= 3 && randomNumber < 6) {
                 //ajouter un ingrédient
@@ -137,7 +129,6 @@ public class Main {
                 ArrayList<String> listTemporaireString = new ArrayList<>();
                 ajouterIngredient(p,listTemporaire,listTemporaireString);
                 int randomAjouter = random.nextInt(listTemporaire.size());
-                p.addIngredientString(listTemporaireString.get(randomAjouter));
                 p.addIngredient(listTemporaire.get(randomAjouter));
             } else if (randomNumber >= 6 && randomNumber < 9) {
                 //remplacer un ingrédient
@@ -145,10 +136,9 @@ public class Main {
                     int randomSupprimer = random.nextInt(pizzas.get(i).getNb_ingr());
                     ArrayList<Ingredient> listTemporaire = new ArrayList<>();
                     ArrayList<String> listTemporaireString = new ArrayList<>();
-                    p.getIngredients().remove(randomSupprimer);
+                    p.removeIngredient(randomSupprimer);
                     ajouterIngredient(p, listTemporaire, listTemporaireString);
                     int randomAjouter = random.nextInt(listTemporaire.size());
-                    p.addIngredientString(listTemporaireString.get(randomAjouter));
                     p.addIngredient(listTemporaire.get(randomAjouter));
                 }
             }
