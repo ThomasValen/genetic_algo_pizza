@@ -36,7 +36,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        int nb_gen_max = 100;
+        int nb_gen_max = 10000;
         for (int i=1; i<nb_gen_max+1; i++) {
             gen = croisement(gen);
             gen = mutation(gen);
@@ -67,41 +67,40 @@ public class Main {
 
     public static ArrayList<Pizza> croisement(ArrayList<Pizza> list_pizza){
         ArrayList<Pizza> combinaison = new ArrayList<>();
-        for(int i =0;i<100;i=i+2){
-            int coupure1 = (int)(Math.random() * list_pizza.get(i).getNb_ingr());
-            int coupure2 = (int)(Math.random() * list_pizza.get(i+1).getNb_ingr());
+        for(int i =0;i<100;i=i+1){
+            int coupure1 = (int)(Math.random() * list_pizza.get(0).getNb_ingr());
+            int coupure2 = (int)(Math.random() * list_pizza.get(i).getNb_ingr());
             Pizza p1 = new Pizza();
             Pizza p2 = new Pizza();
             for(int e = 0;e<coupure1;e++){
-                if(!p1.getIngredientsString().contains(list_pizza.get(i).getIngredients().get(e).getNom())) {
-                    p1.addIngredient(list_pizza.get(i).getIngredients().get(e));
+                if(!p1.getIngredientsString().contains(list_pizza.get(0).getIngredients().get(e).getNom())) {
+                    p1.addIngredient(list_pizza.get(0).getIngredients().get(e));
                 }
             }
             for(int e = 0;e<coupure2;e++){
-                if(!p2.getIngredientsString().contains(list_pizza.get(i+1).getIngredients().get(e).getNom())) {
-                    p2.addIngredient(list_pizza.get(i + 1).getIngredients().get(e));
-                }
-            }
-            for(int e =coupure1;e<list_pizza.get(i).getNb_ingr();e++){
                 if(!p2.getIngredientsString().contains(list_pizza.get(i).getIngredients().get(e).getNom())) {
                     p2.addIngredient(list_pizza.get(i).getIngredients().get(e));
                 }
             }
-            for(int e =coupure2;e<list_pizza.get(i+1).getNb_ingr();e++){
-                if(!p1.getIngredientsString().contains(list_pizza.get(i+1).getIngredients().get(e).getNom())) {
-                    p1.addIngredient(list_pizza.get(i + 1).getIngredients().get(e));
+            for(int e =coupure1;e<list_pizza.get(0).getNb_ingr();e++){
+                if(!p2.getIngredientsString().contains(list_pizza.get(0).getIngredients().get(e).getNom())) {
+                    p2.addIngredient(list_pizza.get(0).getIngredients().get(e));
+                }
+            }
+            for(int e =coupure2;e<list_pizza.get(i).getNb_ingr();e++){
+                if(!p1.getIngredientsString().contains(list_pizza.get(i).getIngredients().get(e).getNom())) {
+                    p1.addIngredient(list_pizza.get(i).getIngredients().get(e));
                 }
             }
             p1.evaluer_score(lf.getListeClients());
             p2.evaluer_score(lf.getListeClients());
-            if(p1.getScore()>list_pizza.get(i).getScore() )
-                combinaison.add(p1);
-            else
-                combinaison.add(list_pizza.get(i));
-            if(p2.getScore()>list_pizza.get(i+1).getScore() )
-                combinaison.add(p2);
-            else
-                combinaison.add(list_pizza.get(i+1));
+            //if(p1.getScore()>list_pizza.get(0).getScore() || p2.getScore()>list_pizza.get(0).getScore())
+                if(p1.getScore()>p2.getScore())
+                    combinaison.add(p1);
+                else
+                    combinaison.add(p2);
+            //else
+                //combinaison.add(list_pizza.get(0));
         }
         sortPizzasByScore(combinaison);
         //print_generation(-2,combinaison);
