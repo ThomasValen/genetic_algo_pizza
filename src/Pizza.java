@@ -28,20 +28,25 @@ public class Pizza {
     }
 
     public void evaluer_score(ArrayList<Client> clients){
+        this.score = 0;
         for (Client client : clients){
+            boolean  b = false;
             for (String ingredient : ingredientsString) {
                 if (client.getIngredientsDetesterString().contains(ingredient)){
-                    break;
+                    b = true;
                 }
             }
-            int compteur = 0;
-            for (String ingredient : client.getIngredientsAimerString()){
-                if (ingredientsString.contains(ingredient)){
-                    compteur++;
+            if (!b) {
+                int compteur = 0;
+                for (String ingredient : client.getIngredientsAimerString()){
+                    if (ingredientsString.contains(ingredient)){
+                        compteur++;
+                    }
                 }
+                if(compteur>= client.getIngredientsAimerString().size())
+                    score++;
             }
-            if(compteur>= client.getIngredientsAimerString().size())
-                score++;
+
         }
     }
 
@@ -65,4 +70,6 @@ public class Pizza {
     public void setIngredientsString(ArrayList<String> ingredientsString) {
         this.ingredientsString = ingredientsString;
     }
+
+
 }

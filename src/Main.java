@@ -1,5 +1,7 @@
 package src;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,15 +13,29 @@ public class Main {
     public static void main(String[] args) {
         lf.lireFichier();
         System.out.println(lf);
-        /*Pizza pizza= new Pizza();
-        pizza.addIngredientString("ingredient319");
-        pizza.addIngredientString("ingredient79");
-        pizza.addIngredientString("ingredient9");
-        pizza.evaluer_score(lf.getListeClients());
-        System.out.println(pizza.getScore());*/
         ArrayList<Pizza> gen = new_gen();
         System.out.println("INIT RANDOM GEN");
         print_generation(0,gen);
+        String cheminFichier = "C:/Users/Thomas/Documents/opti/soluce.txt";
+
+        String contenu = ""+gen.get(0).getIngredients().size();
+        for (String ingr : gen.get(0).getIngredientsString()){
+            contenu = contenu + " "+ingr;
+        }
+
+        try {
+            FileWriter writer = new FileWriter(cheminFichier);
+
+            writer.write(contenu);
+
+            writer.close();
+
+            System.out.println("Le texte a été écrit avec succès dans le fichier.");
+        } catch (IOException e) {
+            System.out.println("Une erreur s'est produite lors de l'écriture dans le fichier : " + e.getMessage());
+            e.printStackTrace();
+        }
+
         int nb_gen_max = 100;
         for (int i=1; i<nb_gen_max+1; i++) {
             gen = croisement(gen);
@@ -53,8 +69,10 @@ public class Main {
     public static ArrayList<Pizza> croisement(ArrayList<Pizza> list_pizza){
         ArrayList<Pizza> combinaison = new ArrayList<>();
         for(int i =0;i<100;i=i+2){
-            int coupure1 = (int)(Math.random() * list_pizza.get(i).getNb_ingr());
-            int coupure2 = (int)(Math.random() * list_pizza.get(i+1).getNb_ingr());
+            int coupure1 = (int)(Math.random() * list_pizza.get(i).getNb_ingr());//2
+            //coupure1 = coupure1 + list_pizza.get(i).getNb_ingr()/4;
+            int coupure2 = (int)(Math.random() * list_pizza.get(i+1).getNb_ingr());//2
+            //coupure2 = coupure2 + list_pizza.get(i+1).getNb_ingr()/4;
             Pizza p1 = new Pizza();
             Pizza p2 = new Pizza();
             for(int e = 0;e<coupure1;e++){
@@ -83,8 +101,14 @@ public class Main {
             }
             p1.evaluer_score(lf.getListeClients());
             p2.evaluer_score(lf.getListeClients());
-            combinaison.add(p1);
-            combinaison.add(p2);
+            if(p1.getScore()>list_pizza.get(i).getScore() )
+                combinaison.add(p1);
+            else
+                combinaison.add(list_pizza.get(i));
+            if(p2.getScore()>list_pizza.get(i+1).getScore() )
+                combinaison.add(p2);
+            else
+                combinaison.add(list_pizza.get(i+1));
         }
         sortPizzasByScore(combinaison);
         //print_generation(-2,combinaison);
@@ -129,7 +153,10 @@ public class Main {
                 }
             }
             p.evaluer_score(lf.getListeClients());
-            combinaison.add(p);
+            if (p.getScore()>combinaison.get(i).getScore())
+                combinaison.add(p);
+            else
+                combinaison.add(combinaison.get(i));
         }
         sortPizzasByScore(combinaison);
         System.out.println("YOOO + "+combinaison.size());
