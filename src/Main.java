@@ -8,17 +8,18 @@ import java.util.Comparator;
 import java.util.Random;
 
 public class Main {
-    private static LectureFichier lf = new LectureFichier("src/fichiers/d_difficile.txt");
+    private static LectureFichier lf ;
 
     public static void main(String[] args) {
+        lf = new LectureFichier(args[0]);
         lf.lireFichier();
         System.out.println(lf);
         ArrayList<Pizza> gen = new_gen();
         System.out.println("INIT RANDOM GEN");
         print_generation(0,gen);
-        String cheminFichier = "src/fichiers/soluce_d.txt";
+        String cheminFichier = "Solution_"+args[0];
 
-        int nb_gen_max = 10000;
+        int nb_gen_max = Integer.parseInt(args[1]);
         for (int i=1; i<nb_gen_max+1; i++) {
             gen = croisement(gen);
             gen = mutation(gen);
@@ -124,8 +125,10 @@ public class Main {
                 ArrayList<Ingredient> listTemporaire = new ArrayList<>();
                 ArrayList<String> listTemporaireString = new ArrayList<>();
                 ajouterIngredient(p,listTemporaire,listTemporaireString);
-                int randomAjouter = random.nextInt(listTemporaire.size());
-                p.addIngredient(listTemporaire.get(randomAjouter));
+                if(!listTemporaire.isEmpty()) {
+                    int randomAjouter = random.nextInt(listTemporaire.size());
+                    p.addIngredient(listTemporaire.get(randomAjouter));
+                }
             } else if (randomNumber >= 6 && randomNumber < 9) {
                 //remplacer un ingrédient
                 if (pizzas.get(i).getNb_ingr() != 0) {
@@ -170,9 +173,9 @@ public class Main {
     public static void print_generation(int num_gen , ArrayList<Pizza> gen){
         System.out.println("NUMERO GEN : "+num_gen+"\n");
         for(int i=0;i<gen.size();i++){
-            System.out.println("score : "+gen.get(i).getScore()+ "   ingredients : "+gen.get(i).toString());
+            System.out.println("score : "+gen.get(i).getScore()+ "   nombre d'ingrédients : "+gen.get(i).getIngredients().size());
         }
-        System.out.println("");
+        System.out.println();
     }
 
     public static void print_bestScoreGen(int num_gen , ArrayList<Pizza> gen){
