@@ -169,6 +169,7 @@ public class Main {
                 return Integer.compare(pizza2.getScore(), pizza1.getScore());
             }
         });
+
     }
 
     public static void print_generation(int num_gen , ArrayList<Pizza> gen){
