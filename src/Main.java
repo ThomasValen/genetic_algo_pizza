@@ -143,10 +143,10 @@ public class Main {
                 }
             }
             p.evaluer_score(lf.getListeClients());
-            if (p.getScore()>combinaison.get(i).getScore())
+            if (p.getScore()>pizzas.get(i).getScore())
                 combinaison.add(p);
             else
-                combinaison.add(combinaison.get(i));
+                combinaison.add(pizzas.get(i));
         }
         sortPizzasByScore(combinaison);
         System.out.println("YOOO + "+combinaison.size());
