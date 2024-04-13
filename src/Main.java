@@ -100,8 +100,7 @@ public class Main {
                 //Supprimer un ingrédient
                 if(pizzas.get(i).getNb_ingr()!=0) {
                     int randomSupprimer = random.nextInt(pizzas.get(i).getNb_ingr());
-                    p.getIngredients().remove(randomSupprimer);
-                    p.getIngredientsString().remove(randomSupprimer);
+                    p.removeIngredient(randomSupprimer);
                 }
             } else if (randomNumber >= 3 && randomNumber < 6) {
                 //ajouter un ingrédient
@@ -116,7 +115,7 @@ public class Main {
                     int randomSupprimer = random.nextInt(pizzas.get(i).getNb_ingr());
                     ArrayList<Ingredient> listTemporaire = new ArrayList<>();
                     ArrayList<String> listTemporaireString = new ArrayList<>();
-                    p.getIngredients().remove(randomSupprimer);
+                    p.removeIngredient(randomSupprimer);
                     ajouterIngredient(p, listTemporaire, listTemporaireString);
                     int randomAjouter = random.nextInt(listTemporaire.size());
                     p.addIngredient(listTemporaire.get(randomAjouter));
@@ -126,7 +125,6 @@ public class Main {
             combinaison.add(p);
         }
         sortPizzasByScore(combinaison);
-        System.out.println("YOOO + "+combinaison.size());
         return combinaison;
     }
     public static void ajouterIngredient(Pizza p, ArrayList<Ingredient> listTemporaire, ArrayList<String> listTemporaireString){

@@ -11,7 +11,10 @@ public class Pizza {
     public Pizza() {
 
     }
-
+    public void removeIngredient(int pos){
+        ingredientsString.remove(pos);
+        ingredients.remove(pos);
+    }
     public int getNb_ingr(){
         return this.ingredients.size();
     }
