@@ -3,8 +3,9 @@ package src;
 import java.util.ArrayList;
 
 public class RechercheTabou {
-    private ArrayList<Pizza> listeTabou;
+    private ArrayList<Mouvement> listeTabou;
     private Pizza pizzaActuel;
+    int compteur = 0;
     private int scoreActuel;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<Client> clients;
@@ -18,32 +19,43 @@ public class RechercheTabou {
         System.out.println("SCORE DEBUT = " + scoreActuel);
     }
     public void calculDuMeilleurVoisin(){
+        Mouvement mouvement = new Mouvement();
         int scoreTemp = 0;
         int scoreBest = scoreActuel;
         Pizza temp = new Pizza(pizzaActuel);
         Pizza best = new Pizza(pizzaActuel);
         for (Ingredient ingredient : ingredients){
+            //Ajouter un ingrédient
             if(!temp.getIngredients().contains(ingredient)) {
                 temp.addIngredient(ingredient);
-                temp.evaluer_score(clients);
-                scoreTemp = temp.getScore();
-                System.out.println(temp + " score : " + scoreTemp);
-                if (scoreTemp >= scoreBest) {
-                    System.out.println("COUCOU");
-                    scoreBest = scoreTemp;
-                    best.setIngredients(new ArrayList<>(temp.getIngredients()));
-                    best.setIngredientsString(new ArrayList<>(temp.getIngredientsString()));
-                    best.setScore(temp.getScore());
-                    System.out.println("LOOK AT ME " + best.getIngredientsString() + best.getIngredients());
+                if (!listeTabou.contains(new Mouvement("ajouter",ingredient))) {
+                    compteur++;
+                    temp.evaluer_score(clients);
+                    scoreTemp = temp.getScore();
+                    if (scoreTemp >= scoreBest) {
+                        System.out.println("COUCOU");
+                        scoreBest = scoreTemp;
+                        best.setIngredients(new ArrayList<>(temp.getIngredients()));
+                        best.setIngredientsString(new ArrayList<>(temp.getIngredientsString()));
+                        best.setScore(temp.getScore());
+                        mouvement.setIngredient(ingredient);
+                        mouvement.setAction("ajouter");
+                    }
+                    temp.removeIngredient(ingredient);
                 }
-                temp.removeIngredient(ingredient);
-                System.out.println("LOOK AT ME " + best.getIngredientsString() + best.getIngredients());
             }
+            //Supprimer un ingrédient
         }
         System.out.println("LOOK AT ME " + best.getIngredientsString() + best.getIngredients());
         pizzaActuel = best;
         scoreActuel = scoreBest;
-        this.listeTabou.add(pizzaActuel);
+        if(!listeTabou.contains(mouvement) && mouvement.getAction() !=null)
+            this.listeTabou.add(mouvement);
+
+    }
+
+    public int getCompteur() {
+        return compteur;
     }
 
     public int getScoreActuel() {
@@ -54,8 +66,8 @@ public class RechercheTabou {
         this.scoreActuel = scoreActuel;
     }
 
-    public void ajouterTabou(Pizza p){
-        listeTabou.add(p);
+    public void ajouterTabou(Mouvement m){
+        listeTabou.add(m);
     }
     public void ajouterIngredient(Ingredient ingredient){
         this.pizzaActuel.addIngredient(ingredient);
@@ -68,11 +80,11 @@ public class RechercheTabou {
         this.pizzaActuel = pizzaActuel;
     }
 
-    public void setListeTabou(ArrayList<Pizza> listeTabou) {
+    public void setListeTabou(ArrayList<Mouvement> listeTabou) {
         this.listeTabou = listeTabou;
     }
 
-    public ArrayList<Pizza> getListeTabou() {
+    public ArrayList<Mouvement> getListeTabou() {
         return listeTabou;
     }
 }
