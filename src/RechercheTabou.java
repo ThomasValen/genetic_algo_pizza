@@ -27,13 +27,18 @@ public class RechercheTabou {
             temp.evaluer_score(clients);
             scoreTemp = temp.getScore();
             System.out.println(temp + " score : " + scoreTemp);
-            if (scoreTemp > scoreBest){
+            if (scoreTemp >= scoreBest ){
                 System.out.println("COUCOU");
                 scoreBest = scoreTemp;
-                best = temp;
+                best.setIngredients(new ArrayList<>(temp.getIngredients()));
+                best.setIngredientsString(new ArrayList<>(temp.getIngredientsString()));
+                best.setScore(temp.getScore());
+                System.out.println("LOOK AT ME " + best.getIngredientsString() + best.getIngredients());
             }
             temp.removeIngredient(ingredient);
+            System.out.println("LOOK AT ME " + best.getIngredientsString() + best.getIngredients());
         }
+        System.out.println("LOOK AT ME " + best.getIngredientsString() + best.getIngredients());
         pizzaActuel = best;
         scoreActuel = scoreBest;
         this.listeTabou.add(pizzaActuel);
