@@ -15,6 +15,10 @@ public class Pizza {
         ingredientsString.remove(pos);
         ingredients.remove(pos);
     }
+    public void removeIngredient(Ingredient ingredient){
+        ingredientsString.remove(ingredient.getNom());
+        ingredients.remove(ingredient);
+    }
     public int getNb_ingr(){
         return this.ingredients.size();
     }
