@@ -25,12 +25,12 @@ public class RechercheTabou {
         for (Ingredient ingredient : ingredients){
             temp.addIngredient(ingredient);
             temp.evaluer_score(clients);
-            System.out.println(temp);
             scoreTemp = temp.getScore();
+            System.out.println(temp + " score : " + scoreTemp);
             if (scoreTemp > scoreBest){
                 System.out.println("COUCOU");
                 scoreBest = scoreTemp;
-                pizzaActuel = temp;
+                best = temp;
             }
             temp.removeIngredient(ingredient);
         }
