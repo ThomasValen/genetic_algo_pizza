@@ -20,8 +20,8 @@ public class RechercheTabou {
     public void calculDuMeilleurVoisin(){
         int scoreTemp = 0;
         int scoreBest = scoreActuel;
-        Pizza temp = pizzaActuel;
-        Pizza best = pizzaActuel;
+        Pizza temp = new Pizza(pizzaActuel);
+        Pizza best = new Pizza(pizzaActuel);
         for (Ingredient ingredient : ingredients){
             temp.addIngredient(ingredient);
             temp.evaluer_score(clients);

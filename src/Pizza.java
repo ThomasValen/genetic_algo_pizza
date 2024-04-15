@@ -8,7 +8,13 @@ public class Pizza {
     private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
     private ArrayList<String> ingredientsString = new ArrayList<String>();
 
-    public Pizza() {
+    public Pizza(Pizza pizzaActuel) {
+        score= pizzaActuel.getScore();
+        ingredients = pizzaActuel.getIngredients();
+        ingredientsString = pizzaActuel.getIngredientsString();
+    }
+
+    public Pizza(){
 
     }
 
