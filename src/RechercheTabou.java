@@ -33,7 +33,7 @@ public class RechercheTabou {
                     temp.evaluer_score(clients);
                     scoreTemp = temp.getScore();
                     if (scoreTemp >= scoreBest) {
-                        System.out.println("COUCOU");
+                        //System.out.println("COUCOU");
                         scoreBest = scoreTemp;
                         best.setIngredients(new ArrayList<>(temp.getIngredients()));
                         best.setIngredientsString(new ArrayList<>(temp.getIngredientsString()));
@@ -45,8 +45,26 @@ public class RechercheTabou {
                 }
             }
             //Supprimer un ingrédient
+            if(temp.getIngredients().contains(ingredient)) {
+                temp.removeIngredient(ingredient);
+                if (!listeTabou.contains(new Mouvement("supprimer",ingredient))) {
+                    compteur++;
+                    temp.evaluer_score(clients);
+                    scoreTemp = temp.getScore();
+                    if (scoreTemp >= scoreBest) {
+                        //System.out.println("COUCOU");
+                        scoreBest = scoreTemp;
+                        best.setIngredients(new ArrayList<>(temp.getIngredients()));
+                        best.setIngredientsString(new ArrayList<>(temp.getIngredientsString()));
+                        best.setScore(temp.getScore());
+                        mouvement.setIngredient(ingredient);
+                        mouvement.setAction("supprimer");
+                    }
+                    temp.addIngredient(ingredient);
+                }
+            }
         }
-        System.out.println("LOOK AT ME " + best.getIngredientsString() + best.getIngredients());
+        //System.out.println("LOOK AT ME " + best.getIngredientsString() + best.getIngredients());
         pizzaActuel = best;
         scoreActuel = scoreBest;
         if(!listeTabou.contains(mouvement) && mouvement.getAction() !=null)
