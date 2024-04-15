@@ -10,13 +10,12 @@ public class MainRechercheTabou {
         //LectureFichier lf = new LectureFichier(args[0]);
         LectureFichier lf = new LectureFichier(chemin);
         lf.lireFichier();
-        RechercheTabou rechercheTabou = new RechercheTabou();
+        RechercheTabou rechercheTabou = new RechercheTabou(lf.getListeIngredients(),lf.getListeClients());
         System.out.println("Debut recherche tabou");
-        ArrayList<Ingredient> listIngredients = lf.getListeIngredients();
-        System.out.println(listIngredients);
         for (int i = 0; i< 10; ++i){
-            rechercheTabou.calculDuMeilleurVoisin(listIngredients,lf.getListeClients());
+            rechercheTabou.calculDuMeilleurVoisin();
             System.out.println("Meilleure score au stade "+ i + " : "+ rechercheTabou.getScoreActuel());
+            System.out.println(rechercheTabou.getPizzaActuel().getScore());
             System.out.println(rechercheTabou.getPizzaActuel());
         }
     }

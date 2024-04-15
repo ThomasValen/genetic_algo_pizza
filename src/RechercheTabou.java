@@ -6,12 +6,18 @@ public class RechercheTabou {
     private ArrayList<Pizza> listeTabou;
     private Pizza pizzaActuel;
     private int scoreActuel;
-    public RechercheTabou() {
+    private ArrayList<Ingredient> ingredients;
+    private ArrayList<Client> clients;
+    public RechercheTabou(ArrayList<Ingredient> ingredients,ArrayList<Client> clients) {
         listeTabou = new ArrayList<>();
         pizzaActuel = new Pizza();
-        this.scoreActuel = pizzaActuel.getScore();
+        this.clients = clients;
+        this.ingredients = ingredients;
+        pizzaActuel.evaluer_score(clients);
+        scoreActuel = pizzaActuel.getScore();
+        System.out.println("SCORE DEBUT = " + scoreActuel);
     }
-    public Pizza calculDuMeilleurVoisin(ArrayList<Ingredient> ingredients,ArrayList<Client> clients){
+    public void calculDuMeilleurVoisin(){
         int scoreTemp = 0;
         int scoreBest = scoreActuel;
         Pizza temp = pizzaActuel;
@@ -19,17 +25,18 @@ public class RechercheTabou {
         for (Ingredient ingredient : ingredients){
             temp.addIngredient(ingredient);
             temp.evaluer_score(clients);
+            System.out.println(temp);
             scoreTemp = temp.getScore();
             if (scoreTemp > scoreBest){
+                System.out.println("COUCOU");
                 scoreBest = scoreTemp;
-                best = temp;
+                pizzaActuel = temp;
             }
             temp.removeIngredient(ingredient);
         }
         pizzaActuel = best;
         scoreActuel = scoreBest;
         this.listeTabou.add(pizzaActuel);
-        return best;
     }
 
     public int getScoreActuel() {

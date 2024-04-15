@@ -11,10 +11,18 @@ public class Pizza {
     public Pizza() {
 
     }
+
+
+
     public void removeIngredient(int pos){
         ingredientsString.remove(pos);
         ingredients.remove(pos);
     }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public void removeIngredient(Ingredient ingredient){
         ingredientsString.remove(ingredient.getNom());
         ingredients.remove(ingredient);
