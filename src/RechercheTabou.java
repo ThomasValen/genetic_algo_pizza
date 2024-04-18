@@ -20,6 +20,7 @@ public class RechercheTabou {
     }
     public void calculDuMeilleurVoisin(){
         Mouvement mouvement = new Mouvement();
+        boolean ajout = false;
         int scoreTemp = 0;
         int scoreBest = scoreActuel;
         Pizza temp = new Pizza(pizzaActuel);
@@ -28,7 +29,7 @@ public class RechercheTabou {
             //Ajouter un ingrédient
             if(!temp.getIngredients().contains(ingredient)) {
                 temp.addIngredient(ingredient);
-                if (!listeTabou.contains(new Mouvement("ajouter",ingredient))) {
+                if (!contientMouvement(new Mouvement("ajouter",ingredient))) {
                     compteur++;
                     temp.evaluer_score(clients);
                     scoreTemp = temp.getScore();
@@ -47,11 +48,11 @@ public class RechercheTabou {
             //Supprimer un ingrédient
             if(temp.getIngredients().contains(ingredient)) {
                 temp.removeIngredient(ingredient);
-                if (!listeTabou.contains(new Mouvement("supprimer",ingredient))) {
+                if (!contientMouvement(new Mouvement("supprimer",ingredient))) {
                     compteur++;
                     temp.evaluer_score(clients);
                     scoreTemp = temp.getScore();
-                    if (scoreTemp >= scoreBest) {
+                    if (scoreTemp > scoreBest) {
                         //System.out.println("COUCOU");
                         scoreBest = scoreTemp;
                         best.setIngredients(new ArrayList<>(temp.getIngredients()));
@@ -104,5 +105,14 @@ public class RechercheTabou {
 
     public ArrayList<Mouvement> getListeTabou() {
         return listeTabou;
+    }
+    public boolean contientMouvement(Mouvement m){
+        for (Mouvement mouvement : listeTabou){
+            if(mouvement.getIngredient().equals(m.getIngredient())) {
+                if (mouvement.getAction().equals(m.getAction()))
+                    return true;
+            }
+        }
+        return false;
     }
 }
